@@ -2,3 +2,34 @@
     padding: 0;
     margin: 0;
 }
+
+header {
+    text-align: center;
+    background: linear-gradient(to right, lightblue, darkblue);
+    font-size: 30px;
+    color: white;
+    font-weight: bold;
+}
+
+
+.mainContainer {
+    display:flex;
+    flex-wrap: wrap;
+}
+
+.formContainer {
+    background-color: blue;
+    min-width: 28vw;
+    min-height: 98vh;
+}
+
+.currentWeather {
+    background-color: yellow;
+    min-width: 68vw;
+    min-height: 48vh;
+}
+.forecastContainer {
+    background-color: red;
+    min-width: 68vw;
+    min-height: 48vh;
+}
