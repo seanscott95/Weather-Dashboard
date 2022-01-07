@@ -11,25 +11,62 @@ header {
     font-weight: bold;
 }
 
+form {
+    
+    font-size: 30px;
+    padding-bottom: 10px;
+    border-bottom: 2px black solid;
+    margin-left: 10%;
+    font-weight: bold;
+}
+
+li {
+    background-color: grey;
+    height: 20px;
+    width: 80%;
+    margin-bottom: 10px;
+    margin-left: 30px;
+    list-style: none;
+    border-radius: 5px;
+
+}
+
+input {
+    width: 80%;
+}
+
+.list {
+    text-align: center;
+    padding-top: 10px;
+}
 
 .mainContainer {
-    display:flex;
-    flex-wrap: wrap;
+    display: flex;
+    margin: 5px;
 }
 
 .formContainer {
     background-color: blue;
-    min-width: 28vw;
-    min-height: 98vh;
+    width: 25%;
+    height: 90vh;    
+}
+
+.rightContainer {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
 }
 
 .currentWeather {
     background-color: yellow;
-    min-width: 68vw;
-    min-height: 48vh;
+    width: 70vw;
+    height: 40vh;
+    border: 2px solid black;
+    margin: 20px;
 }
 .forecastContainer {
     background-color: red;
-    min-width: 68vw;
-    min-height: 48vh;
+    width: 70vw;
+    height: 40vh;
+    margin: 20px;
 }
