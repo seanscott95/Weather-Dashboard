@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather Dashboard</title>
-</head>
-<body>
-    <header>Weather Dashboard</header>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./assets/style.css"></link>
+        <title>Weather Dashboard</title>
+    </head>
 
-    <main>
+    <body>
+        <header>Weather Dashboard</header>
+
         <div class="formContainer">
             <form>
                 <label for="inputCity">Search for a City:</label><br>
                 <input id="inputCity" type="text" value="Melbourne"><br>
                 <input type='submit' value="Submit">
-
             </form>
 
             <div class="listContainer">
@@ -34,6 +34,7 @@
 
         <div class="currentWeather"></div>
         <div class="forecast">Five Day Forecast:</div>
-    </main>
-</body>
+
+        <script type="text/javascript" src="assets/script.js"></script>
+    </body>
 </html>
