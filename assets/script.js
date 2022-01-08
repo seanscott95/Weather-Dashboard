@@ -19,6 +19,47 @@
 // the uv index must be coloured to favourable, moderate r severe
 // the 5 day forecast must display the date, icon of weather, the temp, wind speed and humidty
 
+// api key d314e3bf342100cced195fd2b14e5db1
+
+
+
+// var url = "http://api.openweathermap.org/data/2.5/onecall?appid=d314e3bf342100cced195fd2b14e5db1&lat=30.00&lon=30.00" //lat=&lon=&appid=   &exclude
+
+
+
+// fetch(url)
+//     .then(response => {
+//         console.log(response)
+//         return response.json()
+//     })
+//     .then(data => {
+//         console.log(data)
+//     })
+//     .catch(error => {
+//         console.log("errorrrrr")
+//         console.error(error)
+//     })
+
+
+var cityInput = "geelong"
+
+async function requestData() {
+    const response = await fetch("http://api.openweathermap.org/data/2.5/onecall?id="+cityInput+"appid=d314e3bf342100cced195fd2b14e5db1&t");
+    const data = response.json();
+    console.log(data);
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -45,5 +86,5 @@ function weatherIcon() {
 
 // needed??
 function uvIndex() {
-    
+
 }
