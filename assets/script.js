@@ -41,19 +41,30 @@
 //     })
 
 
-var cityInput = "geelong"
+var api = "http://api.openweathermap.org/data/2.5/weather?";
+var cityInput = "q=" + document.querySelector("#inputCity").value;
+console.log(cityInput);
+var apiKey = "&appid=d314e3bf342100cced195fd2b14e5db1";
+var apiUnits = "&units=metric"
+var completeUrl = api + cityInput + apiKey +apiUnits;
+console.log(completeUrl)
+
+var submitBtn = document.querySelector("#submit");
+
+
+// submitBtn.addEventListener("submit", function () {
+//     console.log(cityInput);
+// })
+
+// when i click on submit button then the value of the input is changed
+// 
 
 async function requestData() {
-    const response = await fetch("http://api.openweathermap.org/data/2.5/onecall?id="+cityInput+"appid=d314e3bf342100cced195fd2b14e5db1&t");
+    const response = await fetch(completeUrl);
+    console.log(response)
     const data = response.json();
     console.log(data);
 }
-
-
-
-
-
-
 
 
 
@@ -68,11 +79,20 @@ function searchCity() {
 }
 
 function currentForecast() {
-    
+    //display name date in bold and an icon
+
+    //display temp
+    //display humidity
+    //display wind speed
+    //display uv
 }
 
 function fiveDayForecast() {
-
+    //display date
+    //display icon
+    //display temp
+    //dsiplay windspeed
+    //display humidity
 }
 
 function saveSearchHistory() {

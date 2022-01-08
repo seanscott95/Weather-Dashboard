@@ -13,10 +13,10 @@
 
         <div class="mainContainer">
             <div class="formContainer">
-                <form>
+                <form class="mainForm">
                     <label for="inputCity">Search for a City:</label><br>
                     <input id="inputCity" type="text" value="Melbourne"><br>
-                    <input type='submit' value="Submit">
+                    <input id="submit" type='submit' value="Submit">
                 </form>
     
                 <div class="listContainer">
@@ -34,18 +34,26 @@
             </div>
 
             <div class=rightContainer>
-                <div class=currentWeatherContainer>
-                    <div class="currentWeather"></div>
+                <div class=currentWeather>
+                    <div class="currentTown row"></div>
+                    <div class="currentTemp row"></div>
+                    <div class="currentHumidity row"></div>
+                    <div class="currentWind row"></div>
+                    <div class="currentUv row"></div>
                 </div>
                 
                 <div class="forecastContainer">
                     <div class="forecast">Five Day Forecast:</div>
+                    <div class="firstDay box"></div>
+                    <div class="secondDay box"></div>
+                    <div class="thirdDay box"></div>
+                    <div class="fourthDay box"></div>
+                    <div class="fifthDay box"></div>
                 </div>
             </div>
             
         </div>
         
-
         <script type="text/javascript" src="assets/script.js"></script>
     </body>
 </html>
