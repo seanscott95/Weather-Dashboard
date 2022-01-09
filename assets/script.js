@@ -38,14 +38,18 @@ var thirdDayEl = document.querySelector(".thirdDay");
 var fourthDayEl = document.querySelector(".fourthDay");
 var fifthDayEl = document.querySelector(".fifthDay");
 
-// submit button element
+
+var searchFormEl = document.querySelector(".mainForm");
 var submitBtn = document.querySelector("#submit");
 
-var api = "api.openweathermap.org/data/2.5/weather?";
+var apiWeather = "https://api.openweathermap.org/data/2.5/weather?";
+var apiOneCall = "https://api.openweathermap.org/data/2.5/onecall?";
+var lon = "";
+var lat = "";
 var cityInputVal = document.querySelector("#inputCity").value;
-var apiKey = "&appid=d314e3bf342100cced195fd2b14e5db1";
-var apiUnits = "&units=metric";
-var completeUrl = api + "q=" + cityInputVal + apiKey + apiUnits;
+var apiKey = "d314e3bf342100cced195fd2b14e5db1";
+var apiUnits = "metric";
+var completeUrl = apiWeather + "q=" + cityInputVal + "&appid=" + apiKey + "&units=" + apiUnits;
 console.log(cityInputVal);
 console.log(completeUrl);
 
@@ -57,32 +61,121 @@ function getParams() {
     console.log(query);
     requestData(query)
 }
-getParams();
+
+function printResults(firstObj, secondObj) {
+    console.log(firstObj);
+
+    if (firstObj.name) {
+        currentTownEl.textContent += firstObj.name;
+    } else {
+        currentTownEl.textContent += "Name N/A";
+    }
+    if (firstObj.current.dt) {
+        currentTownEl.textContent += firstObj.current.dt;
+        //CONVERT DT TO A DATE TIME
+    } else {
+        currentTownEl.textContent += "Date N/A";
+    }
+    if (firstObj.weather.icon) {
+        currentTownEl.textContent += firstObj.weather.icon;
+    } else {
+        currentTownEl.textContent += "Icon N/A"
+    }
+
+    if (firstObj.main.temp) {
+        currentTempEl.textContent += firstObj.main.temp;
+    } else {
+        currentTempEl.textContent += "Temp N/A";
+    }
+
+    if (firstObj.main.humidity) {
+        currentHumidityEl.textContent += firstObj.main.humidity;
+    } else {
+        currentHumidityEl.textContent += "Humidity N/A";
+    }
+    if (firstObj.wind.speed) {
+        currentWindEl.textContent += firstObj.wind.speed;
+    } else {
+        currentHumidityEl.textContent += "Humidity N/A";
+    }
+    if (firstObj.main.humidity) {
+        currentHumidityEl.textContent += firstObj.main.humidity;
+    } else {
+        currentHumidityEl.textContent += "Humidity N/A";
+    }
+
+    if (secondObj.current.uvi) {
+        currentUvEl.textContent += secondObj.current.uvi;
+    } else {
+        currentUvEl.textContent += "UV N/A";
+    }
+
+    // fiveday forecast
+    if (secondObj.daily[0]) {
+        firstDayEl.textContent += secondObj.daily[0]
+    } else {
+        firstDayEl.textContent += "N/A"
+    }
+    if (secondObj.daily[1]) {
+        secondDayEl.textContent += secondObj.daily[1]
+    } else {
+        secondDayEl.textContent += "N/A"
+    }
+    if (secondObj.daily[2]) {
+        thirdDayEl.textContent += secondObj.daily[2]
+    } else {
+        thirdDayEl.textContent += "N/A"
+    }
+    if (secondObj.daily[3]) {
+        fourthDayEl.textContent += secondObj.daily[3]
+    } else {
+        fourthDayEl.textContent += "N/A"
+    }
+    if (secondObj.daily[4]) {
+        fifthDayEl.textContent += secondObj.daily[4]
+    } else {
+        fifthDayEl.textContent += "N/A"
+    }
+}
 
 async function requestData(query) {
-    const response = await fetch(completeUrl);
+    
+    var currentQueryUrl = api + "q=" + query + "&apiid=" + apiKey + "&units=" + apiUnits;
+    console.log(currentQueryUrl);
+    const response = await fetch(currentQueryUrl);
     console.log(response.status)
     const data = await response.json();
     console.log(data);
+    
+    while (data.lon && data.lat) {
+        lon += data.lon;
+        lat += data.lat;
+    }
 
+    var newUrl = api + "lat=" + lat + "&lon=" + lon + "&apiid=" + apiKey + "&units=" + apiUnits;
+    const secondResponse = await fetch(newUrl);
+    console.log(secondResponse);
+    const secondData = await secondResponse.json();
+    console.log(secondData);
+    printResults(data, secondData);
+        
 }
 
-requestData();
-
-
-
 function searchCity(event) {
-    event.preventDefault()
+    event.preventDefault();
 
     if (!cityInputVal) {
         console.error("You need a search input value");
         return;
     }
+
     requestData(cityInputVal);
 }
 
 
+searchFormEl.addEventListener("submit", searchCity);
 
+getParams();
 
 
 // function getApi(requestUrl) {
