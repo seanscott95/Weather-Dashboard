@@ -27,6 +27,30 @@
 
 
 
+var api = "api.openweathermap.org/data/2.5/weather?";
+var cityInput = "Melbourne"; //"q=" + document.querySelector("#inputCity").value;
+console.log(cityInput);
+var apiKey = "&appid=d314e3bf342100cced195fd2b14e5db1";
+var apiUnits = "&units=metric"
+var completeUrl = api + "q=" + cityInput + apiKey + apiUnits;
+console.log(completeUrl)
+
+var submitBtn = document.querySelector("#submit");
+
+
+
+async function requestData() {
+    const response = await fetch(completeUrl);
+    console.log(response.status)
+    const data = await response.json();
+    console.log(data);
+}
+
+requestData();
+
+
+
+
 // fetch(url)
 //     .then(response => {
 //         console.log(response)
@@ -41,36 +65,12 @@
 //     })
 
 
-var api = "http://api.openweathermap.org/data/2.5/weather?";
-var cityInput = "q=" + document.querySelector("#inputCity").value;
-console.log(cityInput);
-var apiKey = "&appid=d314e3bf342100cced195fd2b14e5db1";
-var apiUnits = "&units=metric"
-var completeUrl = api + cityInput + apiKey +apiUnits;
-console.log(completeUrl)
-
-var submitBtn = document.querySelector("#submit");
-
-
 // submitBtn.addEventListener("submit", function () {
 //     console.log(cityInput);
 // })
 
 // when i click on submit button then the value of the input is changed
 // 
-
-async function requestData() {
-    const response = await fetch(completeUrl);
-    console.log(response)
-    const data = response.json();
-    console.log(data);
-}
-
-
-
-
-
-
 
 
 
