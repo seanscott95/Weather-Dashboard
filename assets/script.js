@@ -73,72 +73,93 @@ function printResults(firstObj, secondObj) {
     } else {
         currentTownEl.textContent += "Name N/A";
     }
-    if (firstObj.current.dt) {
-        currentTownEl.textContent += firstObj.current.dt;
-        //CONVERT DT TO A DATE TIME
-    } else {
-        currentTownEl.textContent += "Date N/A";
-    }
-    if (firstObj.weather.icon) {
-        currentTownEl.textContent += firstObj.weather.icon;
+    // if (secondObj.current.dt) {
+    //     currentTownEl.textContent += firstObj.current.dt;
+    //     //CONVERT DT TO A DATE TIME
+    // } else {
+    //     currentTownEl.textContent += "Date N/A";
+    // }
+    if (secondObj.current.weather.icon) {
+        currentTownEl.textContent += secondObj.current.weather.icon;
     } else {
         currentTownEl.textContent += "Icon N/A"
     }
 
     if (firstObj.main.temp) {
-        currentTempEl.textContent += firstObj.main.temp;
+        currentTempEl.textContent = "Temp: " + firstObj.main.temp + "C";
     } else {
-        currentTempEl.textContent += "Temp N/A";
+        currentTempEl.textContent += "N/A";
     }
 
     if (firstObj.main.humidity) {
-        currentHumidityEl.textContent += firstObj.main.humidity;
+        currentHumidityEl.textContent = "Humidity: " + firstObj.main.humidity + "%";
     } else {
-        currentHumidityEl.textContent += "Humidity N/A";
+        currentHumidityEl.textContent += "N/A";
     }
     if (firstObj.wind.speed) {
-        currentWindEl.textContent += firstObj.wind.speed;
+        currentWindEl.textContent = "Wind Speed: " + firstObj.wind.speed + "km/h";
     } else {
-        currentHumidityEl.textContent += "Humidity N/A";
+        currentWindEl.textContent += "N/A";
     }
-    if (firstObj.main.humidity) {
-        currentHumidityEl.textContent += firstObj.main.humidity;
-    } else {
-        currentHumidityEl.textContent += "Humidity N/A";
-    }
+    
 
     if (secondObj.current.uvi) {
         currentUvEl.textContent += secondObj.current.uvi;
     } else {
-        currentUvEl.textContent += "UV N/A";
+        currentUvEl.textContent += "N/A";
     }
 
     // fiveday forecast
+   
     if (secondObj.daily[0]) {
-        firstDayEl.textContent += secondObj.daily[0]
+        printFiveDayCard(secondObj.daily[0], firstDayEl);
     } else {
-        firstDayEl.textContent += "N/A"
+        firstDayEl.textContent += "N/A";
     }
     if (secondObj.daily[1]) {
-        secondDayEl.textContent += secondObj.daily[1]
+        printFiveDayCard(secondObj.daily[1], secondDayEl);
     } else {
-        secondDayEl.textContent += "N/A"
+        secondDayEl.textContent += "N/A";
     }
     if (secondObj.daily[2]) {
-        thirdDayEl.textContent += secondObj.daily[2]
+        printFiveDayCard(secondObj.daily[2], thirdDayEl);
     } else {
-        thirdDayEl.textContent += "N/A"
+        thirdDayEl.textContent += "N/A";
     }
     if (secondObj.daily[3]) {
-        fourthDayEl.textContent += secondObj.daily[3]
+        printFiveDayCard(secondObj.daily[3], fourthDayEl);
     } else {
-        fourthDayEl.textContent += "N/A"
+        fourthDayEl.textContent += "N/A";
     }
     if (secondObj.daily[4]) {
-        fifthDayEl.textContent += secondObj.daily[4]
+        printFiveDayCard(secondObj.daily[4], fifthDayEl);
     } else {
-        fifthDayEl.textContent += "N/A"
+        fifthDayEl.textContent += "N/A";
     }
+}
+
+ //display date     dt
+    //display icon     weather.icon
+    //display temp     temp.day
+    //dsiplay windspeed    wind_speed
+    //display humidity     humidity
+
+function printFiveDayCard(dayData, dayElement) {
+    var dateCard = document.createElement("div");
+    dateCard.textContent = dayData.dt;
+    var iconCard = document.createElement("div");
+    iconCard.textContent = dayData.weather.icon;
+    var tempCard = document.createElement("div");
+    tempCard.textContent = "Temp: " + dayData.temp.day + "C";
+    var windCard = document.createElement("div");
+    windCard.textContent = "Wind: " + dayData.wind_speed + "km/h";
+    var humidityCard = document.createElement("div");
+    humidityCard.textContent = "Humidity: " + dayData.humidity + "%";
+
+
+    dayElement.append(dateCard, iconCard, tempCard, windCard, humidityCard);
+
+    //crete element add info to element, add element to element
 }
 
 async function requestData(query) {
@@ -157,11 +178,11 @@ async function requestData(query) {
     console.log(lat);
     var newUrl = apiOneCall + "lat=" + lat + "&lon=" + lon + "&appid=" + apiKey + "&units=" + apiUnits;
     console.log(newUrl);
-    // const secondResponse = await fetch(newUrl);
-    // console.log(secondResponse);
-    // const secondData = await secondResponse.json();
-    // console.log(secondData);
-    // printResults(data, secondData);
+    const secondResponse = await fetch(newUrl);
+    console.log(secondResponse);
+    const secondData = await secondResponse.json();
+    console.log(secondData);
+    printResults(data, secondData);
 }
 
 function searchCity(event) {
