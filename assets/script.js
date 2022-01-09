@@ -73,12 +73,13 @@ function printResults(firstObj, secondObj) {
     } else {
         currentTownEl.textContent += "Name N/A";
     }
-    // if (secondObj.current.dt) {
-    //     currentTownEl.textContent += firstObj.current.dt;
-    //     //CONVERT DT TO A DATE TIME
-    // } else {
-    //     currentTownEl.textContent += "Date N/A";
-    // }
+    if (secondObj.current.dt) {
+        var newDateFormat = new Date(secondObj.current.dt*1000).toLocaleDateString("en-US");
+        currentTownEl.textContent += newDateFormat;
+        //CONVERT DT TO A DATE TIME
+    } else {
+        currentTownEl.textContent += "Date N/A";
+    }
     if (secondObj.current.weather.icon) {
         currentTownEl.textContent += secondObj.current.weather.icon;
     } else {
@@ -146,7 +147,8 @@ function printResults(firstObj, secondObj) {
 
 function printFiveDayCard(dayData, dayElement) {
     var dateCard = document.createElement("div");
-    dateCard.textContent = dayData.dt;
+    var convertedDate = new Date(dayData.dt*1000).toLocaleDateString("en-US");
+    dateCard.textContent = convertedDate;
     var iconCard = document.createElement("div");
     iconCard.textContent = dayData.weather.icon;
     var tempCard = document.createElement("div");
