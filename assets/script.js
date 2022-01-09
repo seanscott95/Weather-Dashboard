@@ -42,12 +42,14 @@ var fifthDayEl = document.querySelector(".fifthDay");
 var searchFormEl = document.querySelector(".mainForm");
 var submitBtn = document.querySelector("#submit");
 
-var apiWeather = "https://api.openweathermap.org/data/2.5/weather?";
+var apiWeather = "http://api.openweathermap.org/data/2.5/weather?";
 var apiOneCall = "https://api.openweathermap.org/data/2.5/onecall?";
 var lon = "";
 var lat = "";
-var cityInputVal = document.querySelector("#inputCity").value;
-var apiKey = "d314e3bf342100cced195fd2b14e5db1";
+
+var cityInput = document.querySelector("#inputCity");
+var cityInputVal = cityInput.value;
+var apiKey = "bbc093470b839c994653daa51c632f1b";
 var apiUnits = "metric";
 var completeUrl = apiWeather + "q=" + cityInputVal + "&appid=" + apiKey + "&units=" + apiUnits;
 console.log(cityInputVal);
@@ -59,11 +61,12 @@ function getParams() {
     console.log(searchParamsArr);
     var query = searchParamsArr[0].split("=").pop();
     console.log(query);
-    requestData(query)
+    requestData(cityInputVal);
 }
 
 function printResults(firstObj, secondObj) {
     console.log(firstObj);
+    console.log(secondObj);
 
     if (firstObj.name) {
         currentTownEl.textContent += firstObj.name;
@@ -140,34 +143,37 @@ function printResults(firstObj, secondObj) {
 
 async function requestData(query) {
     
-    var currentQueryUrl = api + "q=" + query + "&apiid=" + apiKey + "&units=" + apiUnits;
+    var currentQueryUrl = apiWeather + "q=" + query + "&appid=" + apiKey + "&units=" + apiUnits;
     console.log(currentQueryUrl);
     const response = await fetch(currentQueryUrl);
     console.log(response.status)
     const data = await response.json();
     console.log(data);
-    
-    while (data.lon && data.lat) {
-        lon += data.lon;
-        lat += data.lat;
-    }
-
-    var newUrl = api + "lat=" + lat + "&lon=" + lon + "&apiid=" + apiKey + "&units=" + apiUnits;
-    const secondResponse = await fetch(newUrl);
-    console.log(secondResponse);
-    const secondData = await secondResponse.json();
-    console.log(secondData);
-    printResults(data, secondData);
-        
+    console.log(data.coord.lon);
+    console.log(data.coord.lat);
+    lon = data.coord.lon;
+    lat = data.coord.lat;
+    console.log(lon);
+    console.log(lat);
+    var newUrl = apiOneCall + "lat=" + lat + "&lon=" + lon + "&appid=" + apiKey + "&units=" + apiUnits;
+    console.log(newUrl);
+    // const secondResponse = await fetch(newUrl);
+    // console.log(secondResponse);
+    // const secondData = await secondResponse.json();
+    // console.log(secondData);
+    // printResults(data, secondData);
 }
 
 function searchCity(event) {
     event.preventDefault();
+    console.log("Hello");
 
     if (!cityInputVal) {
         console.error("You need a search input value");
         return;
     }
+
+    cityInput.setAttribute("value", cityInputVal);
 
     requestData(cityInputVal);
 }
