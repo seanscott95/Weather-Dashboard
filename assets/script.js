@@ -25,19 +25,38 @@
 
 // var url = "http://api.openweathermap.org/data/2.5/onecall?appid=d314e3bf342100cced195fd2b14e5db1&lat=30.00&lon=30.00" //lat=&lon=&appid=   &exclude
 
+// variables for the current temp elements
+var currentTownEl = document.querySelector(".currentTown");
+var currentTempEl = document.querySelector(".currentTemp");
+var currentHumidityEl = document.querySelector(".currentHumidity");
+var currentWindEl = document.querySelector(".currentWind");
+var currentUvEl = document.querySelector(".currentUv");
+// variables for the five day forecast elements
+var firstDayEl = document.querySelector(".firstDay");
+var secondDayEl = document.querySelector(".secondDay");
+var thirdDayEl = document.querySelector(".thirdDay");
+var fourthDayEl = document.querySelector(".fourthDay");
+var fifthDayEl = document.querySelector(".fifthDay");
 
-
-var api = "api.openweathermap.org/data/2.5/weather?";
-var cityInput = "Melbourne"; //"q=" + document.querySelector("#inputCity").value;
-console.log(cityInput);
-var apiKey = "&appid=d314e3bf342100cced195fd2b14e5db1";
-var apiUnits = "&units=metric"
-var completeUrl = api + "q=" + cityInput + apiKey + apiUnits;
-console.log(completeUrl)
-
+// submit button element
 var submitBtn = document.querySelector("#submit");
 
+var api = "api.openweathermap.org/data/2.5/weather?";
+var cityInputVal = document.querySelector("#inputCity").value;
+var apiKey = "&appid=d314e3bf342100cced195fd2b14e5db1";
+var apiUnits = "&units=metric";
+var completeUrl = api + "q=" + cityInputVal + apiKey + apiUnits;
+console.log(cityInputVal);
+console.log(completeUrl);
 
+
+function getParams() {
+    var searchParamsArr = completeUrl.split("&");
+    console.log(searchParamsArr);
+    var queryTown = searchParamsArr[0].split("=").pop();
+    console.log(queryTown);
+}
+getParams();
 
 async function requestData() {
     const response = await fetch(completeUrl);
