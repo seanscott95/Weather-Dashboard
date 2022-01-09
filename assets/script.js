@@ -53,19 +53,36 @@ console.log(completeUrl);
 function getParams() {
     var searchParamsArr = completeUrl.split("&");
     console.log(searchParamsArr);
-    var queryTown = searchParamsArr[0].split("=").pop();
-    console.log(queryTown);
+    var query = searchParamsArr[0].split("=").pop();
+    console.log(query);
+    requestData(query)
 }
 getParams();
 
-async function requestData() {
+async function requestData(query) {
     const response = await fetch(completeUrl);
     console.log(response.status)
     const data = await response.json();
     console.log(data);
+
 }
 
 requestData();
+
+
+
+function searchCity(event) {
+    event.preventDefault()
+
+    if (!cityInputVal) {
+        console.error("You need a search input value");
+        return;
+    }
+    requestData(cityInputVal);
+}
+
+
+
 
 
 // function getApi(requestUrl) {
