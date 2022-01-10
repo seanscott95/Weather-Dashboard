@@ -27,6 +27,7 @@
 
 // variables for the current temp elements
 var currentTownEl = document.querySelector(".currentTown");
+var currentIcon = document.querySelector("#currentIcon")
 var currentTempEl = document.querySelector(".currentTemp");
 var currentHumidityEl = document.querySelector(".currentHumidity");
 var currentWindEl = document.querySelector(".currentWind");
@@ -76,12 +77,12 @@ function printResults(firstObj, secondObj) {
     if (secondObj.current.dt) {
         var newDateFormat = new Date(secondObj.current.dt*1000).toLocaleDateString("en-US");
         currentTownEl.textContent += newDateFormat;
-        //CONVERT DT TO A DATE TIME
     } else {
         currentTownEl.textContent += "Date N/A";
     }
-    if (secondObj.current.weather.icon) {
-        currentTownEl.textContent += secondObj.current.weather.icon;
+    if (firstObj.weather[0].icon) {
+        var srcUrl = "http://openweathermap.org/img/wn/" + firstObj.weather[0].icon + "@2x.png"
+        currentIcon.src = srcUrl;
     } else {
         currentTownEl.textContent += "Icon N/A"
     }
@@ -104,8 +105,8 @@ function printResults(firstObj, secondObj) {
     }
     
 
-    if (secondObj.current.uvi) {
-        currentUvEl.textContent += secondObj.current.uvi;
+    if (secondObj.daily[0].uvi) {
+        currentUvEl.textContent += secondObj.daily[0].uvi;
     } else {
         currentUvEl.textContent += "N/A";
     }
@@ -150,7 +151,7 @@ function printFiveDayCard(dayData, dayElement) {
     var convertedDate = new Date(dayData.dt*1000).toLocaleDateString("en-US");
     dateCard.textContent = convertedDate;
     var iconCard = document.createElement("div");
-    iconCard.textContent = dayData.weather.icon;
+    iconCard.src = dayData.weather.icon;
     var tempCard = document.createElement("div");
     tempCard.textContent = "Temp: " + dayData.temp.day + "C";
     var windCard = document.createElement("div");
