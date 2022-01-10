@@ -57,14 +57,6 @@ console.log(cityInputVal);
 console.log(completeUrl);
 
 
-function getParams() {
-    var searchParamsArr = completeUrl.split("&");
-    console.log(searchParamsArr);
-    var query = searchParamsArr[0].split("=").pop();
-    console.log(query);
-    requestData(cityInputVal);
-}
-
 function printResults(firstObj, secondObj) {
     console.log(firstObj);
     console.log(secondObj);
@@ -107,6 +99,8 @@ function printResults(firstObj, secondObj) {
 
     if (secondObj.daily[0].uvi) {
         currentUvEl.textContent += secondObj.daily[0].uvi;
+        console.log(secondObj.daily[0].uvi);
+        uvIndex(secondObj.daily[0].uvi);             // uvIndex function not working
     } else {
         currentUvEl.textContent += "N/A";
     }
@@ -151,7 +145,7 @@ function printFiveDayCard(dayData, dayElement) {
     var convertedDate = new Date(dayData.dt*1000).toLocaleDateString("en-US");
     dateCard.textContent = convertedDate;
     var iconCard = document.createElement("div");
-    iconCard.src = dayData.weather.icon;
+    iconCard.src = dayData.weather.icon;                               // weather icon not working
     var tempCard = document.createElement("div");
     tempCard.textContent = "Temp: " + dayData.temp.day + "C";
     var windCard = document.createElement("div");
@@ -205,8 +199,22 @@ function searchCity(event) {
 
 searchFormEl.addEventListener("submit", searchCity);
 
-getParams();
+requestData(cityInputVal);
 
+
+
+
+// not working
+function uvIndex(level) {
+    console.log(level);
+    if (level <= 2) {
+        currentUvEl.style.backgroundColor = "green";
+    } else if (level > 2 && level <= 5) {
+        currentUvEl.style.backgroundColor = "yellow";
+    } else if (level > 5 && level <= 7) {
+        currentUvEl.style.backgroundColor = "orange";
+    } else {currentUvEl.style.backgroundColor = "red"}
+}
 
 // function getApi(requestUrl) {
 //     fetch(requestUrl)
