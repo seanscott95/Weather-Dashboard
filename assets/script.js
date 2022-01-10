@@ -19,6 +19,14 @@
 // the uv index must be coloured to favourable, moderate r severe
 // the 5 day forecast must display the date, icon of weather, the temp, wind speed and humidty
 
+// TODO:
+// have icons appear for current and fiveday
+// have uv index change color depending on level
+// have submit form change value of form
+// have submit form add searched town to list
+// colour of text and other CSS
+
+
 // api key d314e3bf342100cced195fd2b14e5db1
 
 
@@ -74,7 +82,7 @@ function printResults(firstObj, secondObj) {
     }
     if (firstObj.weather[0].icon) {
         var srcUrl = "http://openweathermap.org/img/wn/" + firstObj.weather[0].icon + "@2x.png"
-        currentIcon.src = srcUrl;
+        currentIcon.src += srcUrl;
     } else {
         currentTownEl.textContent += "Icon N/A"
     }
@@ -100,7 +108,7 @@ function printResults(firstObj, secondObj) {
     if (secondObj.daily[0].uvi) {
         currentUvEl.textContent += secondObj.daily[0].uvi;
         console.log(secondObj.daily[0].uvi);
-        uvIndex(secondObj.daily[0].uvi);             // uvIndex function not working
+        // uvIndex(secondObj.daily[0].uvi);             // uvIndex function not working
     } else {
         currentUvEl.textContent += "N/A";
     }
@@ -144,7 +152,7 @@ function printFiveDayCard(dayData, dayElement) {
     var dateCard = document.createElement("div");
     var convertedDate = new Date(dayData.dt*1000).toLocaleDateString("en-US");
     dateCard.textContent = convertedDate;
-    var iconCard = document.createElement("div");
+    var iconCard = document.createElement("img");
     iconCard.src = dayData.weather.icon;                               // weather icon not working
     var tempCard = document.createElement("div");
     tempCard.textContent = "Temp: " + dayData.temp.day + "C";
@@ -205,92 +213,24 @@ requestData(cityInputVal);
 
 
 // not working
-function uvIndex(level) {
-    console.log(level);
-    if (level <= 2) {
-        currentUvEl.style.backgroundColor = "green";
-    } else if (level > 2 && level <= 5) {
-        currentUvEl.style.backgroundColor = "yellow";
-    } else if (level > 5 && level <= 7) {
-        currentUvEl.style.backgroundColor = "orange";
-    } else {currentUvEl.style.backgroundColor = "red"}
-}
 
-// function getApi(requestUrl) {
-//     fetch(requestUrl)
-//       .then(function (response) {
-//         console.log(response.status);
-//         //  Conditional for the the response.status.
-//         if (response.status !== 200) {
-//           // Place the response.status on the page.
-//           responseText.textContent = response.status;
-//         }
-//         return response.json();
-//       })
-//       .then(function (data) {
-//         // Make sure to look at the response in the console and read how 404 response is structured.
-//         console.log(data);
-//       });
-//   }
-  
-//   getApi(completeUrl);
-  
+// function uvIndex(level) {
+//     console.log(level);
+//     if (level <= 2) {
+//         currentUvEl.style.backgroundColor = "green";
+//     } else if (level > 2 && level <= 5) {
+//         currentUvEl.style.backgroundColor = "yellow";
+//     } else if (level > 5 && level <= 7) {
+//         currentUvEl.style.backgroundColor = "orange";
+//     } else {currentUvEl.style.backgroundColor = "red"}
+// }
 
 
-// fetch(url)
-//     .then(response => {
-//         console.log(response)
-//         return response.json()
-//     })
-//     .then(data => {
-//         console.log(data)
-//     })
-//     .catch(error => {
-//         console.log("errorrrrr")
-//         console.error(error)
-//     })
+// not working
 
-
-// submitBtn.addEventListener("submit", function () {
-//     console.log(cityInput);
-// })
-
-// when i click on submit button then the value of the input is changed
-// 
-
-
-
-function searchCity() {
-
-}
-
-function currentForecast() {
-    //display name date in bold and an icon
-
-    //display temp
-    //display humidity
-    //display wind speed
-    //display uv
-}
-
-function fiveDayForecast() {
-    //display date
-    //display icon
-    //display temp
-    //dsiplay windspeed
-    //display humidity
-}
-
-function saveSearchHistory() {
-
-}
-
-// needed??
-function weatherIcon() {
-
-}
-
-// needed??
-function uvIndex() {
-
-}
+// function appendSearch() {
+//     var ul = document.querySelector(".list");
+//     var li = document.createElement("li");
+//     li.textContent = cityInputVal;
+//     ul.append.(li);
+// }
