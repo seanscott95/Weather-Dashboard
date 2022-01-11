@@ -29,8 +29,6 @@
 
 // api key d314e3bf342100cced195fd2b14e5db1
 
-
-
 // var url = "http://api.openweathermap.org/data/2.5/onecall?appid=d314e3bf342100cced195fd2b14e5db1&lat=30.00&lon=30.00" //lat=&lon=&appid=   &exclude
 
 // variables for the current temp elements
@@ -64,7 +62,7 @@ var completeUrl = apiWeather + "q=" + cityInputVal + "&appid=" + apiKey + "&unit
 console.log(cityInputVal);
 console.log(completeUrl);
 
-
+// Receives 2 objects of weather data and prints the data to the respective element
 function printResults(firstObj, secondObj) {
     console.log(firstObj);
     console.log(secondObj);
@@ -75,7 +73,7 @@ function printResults(firstObj, secondObj) {
         currentTownEl.textContent += "Name N/A";
     }
     if (secondObj.current.dt) {
-        var newDateFormat = new Date(secondObj.current.dt*1000).toLocaleDateString("en-US");
+        var newDateFormat = new Date(secondObj.current.dt*1000).toLocaleDateString("en-AU");
         currentTownEl.textContent += newDateFormat;
     } else {
         currentTownEl.textContent += "Date N/A";
@@ -148,9 +146,10 @@ function printResults(firstObj, secondObj) {
     //dsiplay windspeed    wind_speed
     //display humidity     humidity
 
+// Creates the five day weather forecast card and applies the respective data to the respective element
 function printFiveDayCard(dayData, dayElement) {
     var dateCard = document.createElement("div");
-    var convertedDate = new Date(dayData.dt*1000).toLocaleDateString("en-US");
+    var convertedDate = new Date(dayData.dt*1000).toLocaleDateString("en-AU");
     dateCard.textContent = convertedDate;
     var iconCard = document.createElement("img");
     iconCard.src = dayData.weather.icon;                               // weather icon not working
@@ -164,32 +163,34 @@ function printFiveDayCard(dayData, dayElement) {
 
     dayElement.append(dateCard, iconCard, tempCard, windCard, humidityCard);
 
-    //crete element add info to element, add element to element
+    //create element add info to element, add element to element
 }
 
+// Requests data from the weather api and prints those results to a function to be used
 async function requestData(query) {
     
     var currentQueryUrl = apiWeather + "q=" + query + "&appid=" + apiKey + "&units=" + apiUnits;
-    console.log(currentQueryUrl);
+    //console.log(currentQueryUrl);
     const response = await fetch(currentQueryUrl);
     console.log(response.status)
     const data = await response.json();
-    console.log(data);
-    console.log(data.coord.lon);
-    console.log(data.coord.lat);
+    //console.log(data);
+    //console.log(data.coord.lon);
+    //console.log(data.coord.lat);
     lon = data.coord.lon;
     lat = data.coord.lat;
-    console.log(lon);
-    console.log(lat);
+    //console.log(lon);
+    //console.log(lat);
     var newUrl = apiOneCall + "lat=" + lat + "&lon=" + lon + "&appid=" + apiKey + "&units=" + apiUnits;
-    console.log(newUrl);
+    //console.log(newUrl);
     const secondResponse = await fetch(newUrl);
-    console.log(secondResponse);
+    //console.log(secondResponse);
     const secondData = await secondResponse.json();
-    console.log(secondData);
+    //console.log(secondData);
     printResults(data, secondData);
 }
 
+// 
 function searchCity(event) {
     event.preventDefault();
     console.log("Hello");
@@ -199,17 +200,27 @@ function searchCity(event) {
         return;
     }
 
-    cityInput.setAttribute("value", cityInputVal);
+    cityInput.setAttribute("value", event.target.value);
+    // cityInput.value = event.target.value;
 
     requestData(cityInputVal);
 }
 
 
-searchFormEl.addEventListener("submit", searchCity);
+cityInput.addEventListener("submit", searchCity);
 
 requestData(cityInputVal);
 
 
+
+// not working
+
+// function appendSearch() {
+//     var ul = document.querySelector(".list");
+//     var li = document.createElement("li");
+//     li.textContent = cityInputVal;
+//     ul.append.(li);
+// }
 
 
 // not working
@@ -223,14 +234,4 @@ requestData(cityInputVal);
 //     } else if (level > 5 && level <= 7) {
 //         currentUvEl.style.backgroundColor = "orange";
 //     } else {currentUvEl.style.backgroundColor = "red"}
-// }
-
-
-// not working
-
-// function appendSearch() {
-//     var ul = document.querySelector(".list");
-//     var li = document.createElement("li");
-//     li.textContent = cityInputVal;
-//     ul.append.(li);
 // }
