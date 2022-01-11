@@ -89,7 +89,7 @@ input {
     margin: 20px;
 }
 
-.currentTownName {
+.currentTown {
     display: flex;
     height: 50px;
     align-items: center;
