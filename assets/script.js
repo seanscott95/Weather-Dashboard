@@ -20,10 +20,11 @@
 // the 5 day forecast must display the date, icon of weather, the temp, wind speed and humidty
 
 // TODO:
-// have icons appear for current and fiveday
-// have uv index change color depending on level
+// have weather icons appear for current and fiveday
 // have submit form change value of form
 // have submit form add searched town to list
+// melbourne is in america nt australia
+// have uv index change color depending on level
 // colour of text and other CSS
 
 
@@ -44,6 +45,11 @@ var secondDayEl = document.querySelector(".secondDay");
 var thirdDayEl = document.querySelector(".thirdDay");
 var fourthDayEl = document.querySelector(".fourthDay");
 var fifthDayEl = document.querySelector(".fifthDay");
+
+var currentTownNameEl = document.querySelector(".currentTownName");
+var currentTownDateEl = document.querySelector(".currentTownDate");
+var currentTownIconEl = document.querySelector(".currentTownIcon");
+
 
 
 var searchFormEl = document.querySelector(".mainForm");
@@ -68,44 +74,44 @@ function printResults(firstObj, secondObj) {
     console.log(secondObj);
 
     if (firstObj.name) {
-        currentTownEl.textContent += firstObj.name;
+        currentTownNameEl.textContent = firstObj.name;
     } else {
-        currentTownEl.textContent += "Name N/A";
+        currentTownNameEl.textContent = "Name N/A";
     }
     if (secondObj.current.dt) {
         var newDateFormat = new Date(secondObj.current.dt*1000).toLocaleDateString("en-AU");
-        currentTownEl.textContent += newDateFormat;
+        currentTownDateEl.textContent = newDateFormat;
     } else {
-        currentTownEl.textContent += "Date N/A";
+        currentTownDateEl.textContent = "Date N/A";
     }
     if (firstObj.weather[0].icon) {
-        var srcUrl = "http://openweathermap.org/img/wn/" + firstObj.weather[0].icon + "@2x.png"
-        currentIcon.src += srcUrl;
+        var srcUrl = getFullIconUrl(firstObj.weather[0].icon);
+        currentTownIconEl.src = srcUrl;
     } else {
-        currentTownEl.textContent += "Icon N/A"
+        currentTownEl.textContent = "Icon N/A"
     }
 
     if (firstObj.main.temp) {
         currentTempEl.textContent = "Temp: " + firstObj.main.temp + "C";
     } else {
-        currentTempEl.textContent += "N/A";
+        currentTempEl.textContent = "N/A";
     }
 
     if (firstObj.main.humidity) {
         currentHumidityEl.textContent = "Humidity: " + firstObj.main.humidity + "%";
     } else {
-        currentHumidityEl.textContent += "N/A";
+        currentHumidityEl.textContent = "N/A";
     }
     if (firstObj.wind.speed) {
         currentWindEl.textContent = "Wind Speed: " + firstObj.wind.speed + "km/h";
     } else {
-        currentWindEl.textContent += "N/A";
+        currentWindEl.textContent = "N/A";
     }
     
 
     if (secondObj.daily[0].uvi) {
-        currentUvEl.textContent += secondObj.daily[0].uvi;
-        console.log(secondObj.daily[0].uvi);
+        currentUvEl.textContent = "UV: " + secondObj.daily[0].uvi;
+        // console.log(secondObj.daily[0].uvi);
         // uvIndex(secondObj.daily[0].uvi);             // uvIndex function not working
     } else {
         currentUvEl.textContent += "N/A";
@@ -152,7 +158,7 @@ function printFiveDayCard(dayData, dayElement) {
     var convertedDate = new Date(dayData.dt*1000).toLocaleDateString("en-AU");
     dateCard.textContent = convertedDate;
     var iconCard = document.createElement("img");
-    iconCard.src = dayData.weather.icon;                               // weather icon not working
+    iconCard.src = getFullIconUrl(dayData.weather[0].icon);                               // weather icon not working
     var tempCard = document.createElement("div");
     tempCard.textContent = "Temp: " + dayData.temp.day + "C";
     var windCard = document.createElement("div");
@@ -160,7 +166,7 @@ function printFiveDayCard(dayData, dayElement) {
     var humidityCard = document.createElement("div");
     humidityCard.textContent = "Humidity: " + dayData.humidity + "%";
 
-
+    dayElement.textContent = "";
     dayElement.append(dateCard, iconCard, tempCard, windCard, humidityCard);
 
     //create element add info to element, add element to element
@@ -200,16 +206,20 @@ function searchCity(event) {
         return;
     }
 
-    cityInput.setAttribute("value", event.target.value);
-    // cityInput.value = event.target.value;
-
     requestData(cityInputVal);
 }
 
 
-cityInput.addEventListener("submit", searchCity);
+searchFormEl.addEventListener("submit", searchCity);
 
-requestData(cityInputVal);
+// requestData(cityInputVal);
+
+
+function getFullIconUrl(icon) {
+    return "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+}
+
+
 
 
 

@@ -88,3 +88,9 @@ input {
     height: 40vh;
     margin: 20px;
 }
+
+.currentTownName {
+    display: flex;
+    height: 50px;
+    align-items: center;
+}
