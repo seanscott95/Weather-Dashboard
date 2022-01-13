@@ -200,7 +200,7 @@ function getFullIconUrl(icon) {
 
 // Creates a local stroage key and value as the towns name entered 
 function appendToLocal(townName) {
-    localStorage.setItem(townName, townName);
+    localStorage.setItem("Towns", townName);
 }
 
 // Changes the background of the UV index depending on level of UV
@@ -217,14 +217,8 @@ function uvIndex(level, element) {
 
 // Sets towns in list in local storage so they cant be added again
 function checkLocal() {
-    localStorage.setItem("Melbourne", "Melbourne");
-    localStorage.setItem("Brisbane", "Brisbane");
-    localStorage.setItem("Sydney", "Sydney");
-    localStorage.setItem("Canberra", "Canberra");
-    localStorage.setItem("Hobart", "Hobart");
-    localStorage.setItem("Darwin", "Darwin");
-    localStorage.setItem("Adelaide", "Adelaide");
-    localStorage.setItem("Perth", "Perth");
+    var towns = ["Melbourne", "Brisbane", "Sydney", "Canberra", "Hobart", "Darwin", "Adelaide", "Perth"];
+    localStorage.setItem("Towns", towns);
 }
 
 // Runs checkLocal
@@ -240,3 +234,20 @@ searchFormEl.addEventListener("submit", function(event) {
     console.log(cityInputVal);
     searchCity(cityInputVal);
 })
+
+
+
+
+function appendLocalStorage() {
+    var array = localStorage.getItem("Towns");
+    console.log(array);
+    var splitArray = array.split(",");
+    console.log(splitArray);
+    for (var i=0; i < splitArray.length; i++) {
+        var ul = document.querySelector(".list");
+        var li = document.createElement("li");
+        li.textContent = splitArray[i];
+        ul.insertBefore(li, ul.firstChild);
+    }
+}
+appendLocalStorage();
