@@ -65,6 +65,8 @@ var completeUrl = apiWeather + "q=" + cityInput.value + "&appid=" + apiKey + "&u
 console.log(cityInput.value);
 console.log(completeUrl);
 
+var uvAnswerBtn = document.querySelector("#uvAnswer");
+
 // Receives 2 objects of weather data and prints the data to the respective element
 function printResults(firstObj, secondObj) {
     console.log(firstObj);
@@ -107,9 +109,9 @@ function printResults(firstObj, secondObj) {
     
 
     if (secondObj.daily[0].uvi) {
-        currentUvEl.textContent = "UV: " + secondObj.daily[0].uvi;
+        uvAnswerBtn.textContent = secondObj.daily[0].uvi;
         // console.log(secondObj.daily[0].uvi);
-        // uvIndex(secondObj.daily[0].uvi);             // uvIndex function not working
+        uvIndex(secondObj.daily[0].uvi, uvAnswerBtn);             // uvIndex function not working
     } else {
         currentUvEl.textContent += "N/A";
     }
@@ -212,13 +214,13 @@ function searchCity(city) {
 }
 
 
-searchFormEl.addEventListener("submit", () => {
+searchFormEl.addEventListener("submit", function(event) {
+    event.preventDefault();
     cityInputVal = cityInput.value;
     console.log(cityInputVal);
     searchCity(cityInputVal);
 })
 
-// requestData(cityInputVal);
 
 
 function getFullIconUrl(icon) {
@@ -248,6 +250,7 @@ var listEl = document.querySelector(".list");
 listEl.addEventListener("click", listSearch);
 
 function listSearch(event) {
+    event.preventDefault();
     console.log(event.target.textContent);
     var listName = event.target.textContent;
     console.log(listName);
@@ -255,16 +258,15 @@ function listSearch(event) {
 }
 
 
-
 // not working
 
-// function uvIndex(level) {
-//     console.log(level);
-//     if (level <= 2) {
-//         currentUvEl.style.backgroundColor = "green";
-//     } else if (level > 2 && level <= 5) {
-//         currentUvEl.style.backgroundColor = "yellow";
-//     } else if (level > 5 && level <= 7) {
-//         currentUvEl.style.backgroundColor = "orange";
-//     } else {currentUvEl.style.backgroundColor = "red"}
-// }
+function uvIndex(level, element) {
+    console.log(level);
+    if (level <= 2) {
+        element.style.backgroundColor = "green";
+    } else if (level > 2 && level <= 5) {
+        element.style.backgroundColor = "yellow";
+    } else if (level > 5 && level <= 7) {
+        element.style.backgroundColor = "orange";
+    } else {element.style.backgroundColor = "red"}
+}
