@@ -21,7 +21,7 @@ form {
 }
 
 li {
-    background-color: grey;
+    background-color: lightgrey;
     height: 20px;
     width: 80%;
     margin-bottom: 10px;
@@ -32,7 +32,6 @@ li {
 }
 
 .row {
-    background: palegreen;
     width: 90%;
     height: 10%;
     margin: 5px;
@@ -55,6 +54,13 @@ input {
     width: 100%;
 }
 
+#submit {
+    background: blue;
+    opacity: 60%;
+    color: white;
+    border-radius: 5px;
+}
+
 .list {
     text-align: center;
     padding-top: 10px;
@@ -66,7 +72,6 @@ input {
 }
 
 .formContainer {
-    background-color: blue;
     width: 25%;
     height: 90vh;    
 }
@@ -80,14 +85,12 @@ input {
 .currentWeather {
     display: flex;
     flex-direction: column;
-    background-color: yellow;
     width: 70vw;
-    height: 40vh;
+    height: auto;
     border: 2px solid black;
     margin: 20px;
 }
 .forecastContainer {
-    background-color: red;
     width: 70vw;
     height: 40vh;
     margin: 20px;
@@ -95,7 +98,7 @@ input {
 
 .currentTown {
     display: flex;
-    height: 50px;
+    height: 10%;
     align-items: center;
 }
 
@@ -113,4 +116,13 @@ img {
     padding-left: 10px;
     font-weight: bold;
     font-size: larger;
+}
+
+.spacing {
+    margin-left: 10px;
+}
+
+.currentTownName, .currentTownDate {
+    font-size: x-large;
+    font-weight: bold;
 }

@@ -77,7 +77,7 @@ function printResults(firstObj, secondObj) {
     }
     if (secondObj.current.dt) {
         var newDateFormat = new Date(secondObj.current.dt*1000).toLocaleDateString("en-AU");
-        currentTownDateEl.textContent = newDateFormat;
+        currentTownDateEl.textContent = "(" + newDateFormat + ")";
     } else {
         currentTownDateEl.textContent = "Date N/A";
     }
