@@ -22,7 +22,6 @@
 // TODO:
 // have submit form add searched town to list
 // have uv index change color depending on level
-// colour of text and other CSS
 
 
 // api key d314e3bf342100cced195fd2b14e5db1
@@ -58,11 +57,11 @@ var lon = "";
 var lat = "";
 
 var cityInput = document.querySelector("#inputCity");
-var cityInputVal = cityInput.value;
+
 var apiKey = "bbc093470b839c994653daa51c632f1b";
 var apiUnits = "metric";
-var completeUrl = apiWeather + "q=" + cityInputVal + "&appid=" + apiKey + "&units=" + apiUnits;
-console.log(cityInputVal);
+var completeUrl = apiWeather + "q=" + cityInput.value + "&appid=" + apiKey + "&units=" + apiUnits;
+console.log(cityInput.value);
 console.log(completeUrl);
 
 // Receives 2 objects of weather data and prints the data to the respective element
@@ -73,7 +72,7 @@ function printResults(firstObj, secondObj) {
     if (firstObj.name) {
         currentTownNameEl.textContent = firstObj.name;
     } else {
-        currentTownNameEl.textContent = "Name N/A";
+        currentTownNameEl.textContent = "Town Name N/A";
     }
     if (secondObj.current.dt) {
         var newDateFormat = new Date(secondObj.current.dt*1000).toLocaleDateString("en-AU");
@@ -85,24 +84,24 @@ function printResults(firstObj, secondObj) {
         var srcUrl = getFullIconUrl(firstObj.weather[0].icon);
         currentTownIconEl.src = srcUrl;
     } else {
-        currentTownEl.textContent = "Icon N/A"
+        currentTownEl.textContent = "Weather Icon N/A"
     }
 
     if (firstObj.main.temp) {
         currentTempEl.textContent = "Temp: " + firstObj.main.temp + "C";
     } else {
-        currentTempEl.textContent = "N/A";
+        currentTempEl.textContent = "Temp N/A";
     }
 
     if (firstObj.main.humidity) {
         currentHumidityEl.textContent = "Humidity: " + firstObj.main.humidity + "%";
     } else {
-        currentHumidityEl.textContent = "N/A";
+        currentHumidityEl.textContent = "Humidity N/A";
     }
     if (firstObj.wind.speed) {
         currentWindEl.textContent = "Wind Speed: " + firstObj.wind.speed + "km/h";
     } else {
-        currentWindEl.textContent = "N/A";
+        currentWindEl.textContent = "Wind Speed N/A";
     }
     
 
@@ -119,27 +118,27 @@ function printResults(firstObj, secondObj) {
     if (secondObj.daily[0]) {
         printFiveDayCard(secondObj.daily[0], firstDayEl);
     } else {
-        firstDayEl.textContent += "N/A";
+        firstDayEl.textContent = "N/A";
     }
     if (secondObj.daily[1]) {
         printFiveDayCard(secondObj.daily[1], secondDayEl);
     } else {
-        secondDayEl.textContent += "N/A";
+        secondDayEl.textContent = "N/A";
     }
     if (secondObj.daily[2]) {
         printFiveDayCard(secondObj.daily[2], thirdDayEl);
     } else {
-        thirdDayEl.textContent += "N/A";
+        thirdDayEl.textContent = "N/A";
     }
     if (secondObj.daily[3]) {
         printFiveDayCard(secondObj.daily[3], fourthDayEl);
     } else {
-        fourthDayEl.textContent += "N/A";
+        fourthDayEl.textContent = "N/A";
     }
     if (secondObj.daily[4]) {
         printFiveDayCard(secondObj.daily[4], fifthDayEl);
     } else {
-        fifthDayEl.textContent += "N/A";
+        fifthDayEl.textContent = "N/A";
     }
 }
 
@@ -197,6 +196,7 @@ async function requestData(query) {
 // 
 function searchCity(event) {
     event.preventDefault();
+    var cityInputVal = cityInput.value;
     console.log("Hello");
 
     if (!cityInputVal) {
