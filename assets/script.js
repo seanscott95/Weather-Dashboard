@@ -43,7 +43,7 @@ var completeUrl = apiWeather + "q=" + cityInput.value + "&appid=" + apiKey + "&u
 
 // Receives 2 objects of weather data and prints the data to the respective element in the current weather container
 function printResults(firstObj, secondObj) {
-    
+
     if (firstObj.name) {
         currentTownNameEl.textContent = firstObj.name;
     } else {
@@ -228,9 +228,10 @@ function checkLocal() {
 // Runs checkLocal
 checkLocal();
 
-// Event listeners
+// Event listener for each individual list item displaying town names for search
 listEl.addEventListener("click", listSearch);
 
+//Event listener for the form element when submitted
 searchFormEl.addEventListener("submit", function(event) {
     event.preventDefault();
     cityInputVal = cityInput.value;
