@@ -20,10 +20,7 @@
 // the 5 day forecast must display the date, icon of weather, the temp, wind speed and humidty
 
 // TODO:
-// have weather icons appear for current and fiveday
-// have submit form change value of form
 // have submit form add searched town to list
-// melbourne is in america nt australia
 // have uv index change color depending on level
 // colour of text and other CSS
 

@@ -35,7 +35,7 @@ li {
     background: palegreen;
     width: 90%;
     height: 10%;
-    margin: 15px;
+    margin: 5px;
     padding: 3px;
     
 }
@@ -76,6 +76,8 @@ input {
 }
 
 .currentWeather {
+    display: flex;
+    flex-direction: column;
     background-color: yellow;
     width: 70vw;
     height: 40vh;
