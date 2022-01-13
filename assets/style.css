@@ -41,12 +41,14 @@ li {
 }
 
 .box {
-    background: orange;
+    color: white;
+    background: navy;
     width: 16%;
     height: 80%;
     margin: 10px;
     padding: 3px;
     display: inline-grid;
+    
 }
 
 input {
@@ -95,4 +97,20 @@ input {
     display: flex;
     height: 50px;
     align-items: center;
+}
+
+img {
+    height: 50px;
+    width: auto;
+}
+
+.fiveDayDate {
+    font-size: large;
+    font-weight: bold;
+}
+
+.forecast {
+    padding-left: 10px;
+    font-weight: bold;
+    font-size: larger;
 }

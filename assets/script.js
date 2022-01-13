@@ -152,6 +152,7 @@ function printResults(firstObj, secondObj) {
 // Creates the five day weather forecast card and applies the respective data to the respective element
 function printFiveDayCard(dayData, dayElement) {
     var dateCard = document.createElement("div");
+    dateCard.className = "fiveDayDate";
     var convertedDate = new Date(dayData.dt*1000).toLocaleDateString("en-AU");
     dateCard.textContent = convertedDate;
     var iconCard = document.createElement("img");
