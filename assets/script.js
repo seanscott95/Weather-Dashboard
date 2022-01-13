@@ -20,7 +20,8 @@
 // the 5 day forecast must display the date, icon of weather, the temp, wind speed and humidty
 
 // TODO:
-// have submit form add searched town to list
+// when click on town list, enter value and show results
+// when town added to list add to local storage
 // have uv index change color depending on level
 
 
@@ -193,22 +194,29 @@ async function requestData(query) {
     printResults(data, secondData);
 }
 
-// 
-function searchCity(event) {
-    event.preventDefault();
-    var cityInputVal = cityInput.value;
-    console.log("Hello");
-
-    if (!cityInputVal) {
-        console.error("You need a search input value");
-        return;
+//
+function appendSearch(val) {
+    while (!localStorage.getItem(val)) {
+        var ul = document.querySelector(".list");
+        var li = document.createElement("li");
+        li.textContent = val;
+        ul.insertBefore(li, ul.firstChild);
+        appendToLocal(val);
     }
+}
 
-    requestData(cityInputVal);
+// 
+function searchCity(city) {
+    appendSearch(city);
+    requestData(city);
 }
 
 
-searchFormEl.addEventListener("submit", searchCity);
+searchFormEl.addEventListener("submit", () => {
+    cityInputVal = cityInput.value;
+    console.log(cityInputVal);
+    searchCity(cityInputVal);
+})
 
 // requestData(cityInputVal);
 
@@ -218,17 +226,34 @@ function getFullIconUrl(icon) {
 }
 
 
+function appendToLocal(townName) {
+    localStorage.setItem(townName, townName);
+}
+
+function checkLocal() {
+    localStorage.setItem("Melbourne", "Melbourne");
+    localStorage.setItem("Brisbane", "Brisbane");
+    localStorage.setItem("Sydney", "Sydney");
+    localStorage.setItem("Canberra", "Canberra");
+    localStorage.setItem("Hobart", "Hobart");
+    localStorage.setItem("Darwin", "Darwin");
+    localStorage.setItem("Adelaide", "Adelaide");
+    localStorage.setItem("Perth", "Perth");
+}
+
+checkLocal();
 
 
+var listEl = document.querySelector(".list");
+listEl.addEventListener("click", listSearch);
 
-// not working
+function listSearch(event) {
+    console.log(event.target.textContent);
+    var listName = event.target.textContent;
+    console.log(listName);
+    searchCity(listName);
+}
 
-// function appendSearch() {
-//     var ul = document.querySelector(".list");
-//     var li = document.createElement("li");
-//     li.textContent = cityInputVal;
-//     ul.append.(li);
-// }
 
 
 // not working
