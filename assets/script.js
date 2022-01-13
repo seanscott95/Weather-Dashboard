@@ -1,5 +1,7 @@
 // TODO:
-// 
+// When a new button is appended if you click on the side of the list, words appear, fix js
+// When a new button is appended and page is refreshed button is gone, no js yet
+//      Check local storage for towns and apply to list
 
 // variables for the current temp elements
 var currentTownEl = document.querySelector(".currentTown");
