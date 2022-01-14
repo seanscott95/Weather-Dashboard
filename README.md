@@ -15,5 +15,5 @@ Screenshots:
 ![Fourth screenshot showing what the page looks like after being refreshed, the previous searches Geelong and Townsville remain on the list.](./assets/Weather-Dashboard-4.png)
 
 Links:
-Deployed Page:
+Deployed Page: https://seanscott95.github.io/Week-06-Weather-Dashboard/
 GitHub repo: https://github.com/seanscott95/Week-06-Weather-Dashboard
