@@ -179,7 +179,7 @@ function listSearch(event) {
     console.log(event.target.textContent);
     var listName = event.target.textContent;
     console.log(listName);
-    searchCity(listName);
+    requestData(listName);
 }
 
 // Returns the correct url for each image weather icon
@@ -201,14 +201,18 @@ function uvIndex(level, element) {
 
 // Creates a local stroage key and value as the towns name entered 
 function appendToLocal(townName) {
-    localStorage.setItem("Towns", townName);
+    var getLocalStorage = localStorage.getItem("Towns")
+    var newLocalStorage = getLocalStorage + "," + townName;
+    localStorage.setItem("Towns", newLocalStorage);
     appendLocalStorage();
 }
 
 // Add defaults and sets towns in list in local storage so they cant be added again
 function setDefaultLocal() {
     var towns = ["Canberra", "Hobart", "Darwin", "Adelaide", "Perth", "Brisbane", "Sydney", "Melbourne"];
-    localStorage.setItem("Towns", towns);
+    while (!localStorage.getItem("Towns")) {
+        localStorage.setItem("Towns", towns);
+    }
 }
 
 // Runs setDefaultLocal
@@ -218,10 +222,15 @@ setDefaultLocal();
 function appendLocalStorage() {
     var array = localStorage.getItem("Towns");
     console.log(array);
-    var splitArray = array.split(",");
+
+    var splitArray = array.split(",");    
+    var ul = document.querySelector(".list");
     console.log(splitArray);
+    // While loop removes town names from list, so not to double up on the list
+    while(ul.firstChild) {
+        ul.removeChild(ul.firstChild);
+    }
     for (var i=0; i < splitArray.length; i++) {
-        var ul = document.querySelector(".list");
         var li = document.createElement("li");
         li.textContent = splitArray[i];
         ul.insertBefore(li, ul.firstChild);
