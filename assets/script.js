@@ -167,20 +167,9 @@ async function requestData(query) {
     printResults(data, secondData);
 }
 
-// Creates a new list item if value isnt in local storage already
-function appendSearch(val) {
-    while (!localStorage.getItem(val)) {
-        var ul = document.querySelector(".list");
-        var li = document.createElement("li");
-        li.textContent = val;
-        ul.insertBefore(li, ul.firstChild);
-        appendToLocal(val);
-    }
-}
-
 // Uses city as values to send through appendSearch and requestData functions
 function searchCity(city) {
-    appendSearch(city);
+    appendToLocal(city);
     requestData(city);
 }
 
@@ -198,14 +187,9 @@ function getFullIconUrl(icon) {
     return "http://openweathermap.org/img/wn/" + icon + "@2x.png";
 }
 
-// Creates a local stroage key and value as the towns name entered 
-function appendToLocal(townName) {
-    localStorage.setItem("Towns", townName);
-}
-
 // Changes the background of the UV index depending on level of UV
 function uvIndex(level, element) {
-    console.log(level);
+    //console.log(level);
     if (level <= 2) {
         element.style.backgroundColor = "green";
     } else if (level > 2 && level <= 5) {
@@ -215,29 +199,22 @@ function uvIndex(level, element) {
     } else {element.style.backgroundColor = "red"}
 }
 
-// Sets towns in list in local storage so they cant be added again
-function checkLocal() {
-    var towns = ["Melbourne", "Brisbane", "Sydney", "Canberra", "Hobart", "Darwin", "Adelaide", "Perth"];
+// Creates a local stroage key and value as the towns name entered 
+function appendToLocal(townName) {
+    localStorage.setItem("Towns", townName);
+    appendLocalStorage();
+}
+
+// Add defaults and sets towns in list in local storage so they cant be added again
+function setDefaultLocal() {
+    var towns = ["Canberra", "Hobart", "Darwin", "Adelaide", "Perth", "Brisbane", "Sydney", "Melbourne"];
     localStorage.setItem("Towns", towns);
 }
 
-// Runs checkLocal
-checkLocal();
+// Runs setDefaultLocal
+setDefaultLocal();
 
-// Event listener for each individual list item displaying town names for search
-listEl.addEventListener("click", listSearch);
-
-//Event listener for the form element when submitted
-searchFormEl.addEventListener("submit", function(event) {
-    event.preventDefault();
-    cityInputVal = cityInput.value;
-    console.log(cityInputVal);
-    searchCity(cityInputVal);
-})
-
-
-
-
+// Adds list elements from the local storage
 function appendLocalStorage() {
     var array = localStorage.getItem("Towns");
     console.log(array);
@@ -250,4 +227,17 @@ function appendLocalStorage() {
         ul.insertBefore(li, ul.firstChild);
     }
 }
+
+// Runs appendLocalStorage
 appendLocalStorage();
+
+// Event listener for each individual list item displaying town names for search
+listEl.addEventListener("click", listSearch);
+
+//Event listener for the form element when submitted
+searchFormEl.addEventListener("submit", function(event) {
+    event.preventDefault();
+    cityInputVal = cityInput.value;
+    // console.log(cityInputVal);
+    searchCity(cityInputVal);
+})
