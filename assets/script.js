@@ -1,36 +1,33 @@
-// TODO:
-// When a new button is appended if you click on the side of the list, words appear, fix js
-// When a new button is appended and page is refreshed button is gone, no js yet
-//      Check local storage for towns and apply to list
+// # 06 Server-Side APIs: Weather Dashboard
 
 // variables for the current temp elements
-var currentTownEl = document.querySelector(".currentTown");
-var currentIcon = document.querySelector("#currentIcon")
-var currentTempEl = document.querySelector(".currentTemp");
-var currentHumidityEl = document.querySelector(".currentHumidity");
-var currentWindEl = document.querySelector(".currentWind");
-var currentUvEl = document.querySelector(".currentUv");
+var currentTownEl = document.querySelector(".current-town");
+var currentIcon = document.querySelector("#current-icon")
+var currentTempEl = document.querySelector(".current-temp");
+var currentHumidityEl = document.querySelector(".current-humidity");
+var currentWindEl = document.querySelector(".current-wind");
+var currentUvEl = document.querySelector(".current-uv");
 
 // variables for the five day forecast elements
-var firstDayEl = document.querySelector(".firstDay");
-var secondDayEl = document.querySelector(".secondDay");
-var thirdDayEl = document.querySelector(".thirdDay");
-var fourthDayEl = document.querySelector(".fourthDay");
-var fifthDayEl = document.querySelector(".fifthDay");
+var firstDayEl = document.querySelector(".first-day");
+var secondDayEl = document.querySelector(".second-day");
+var thirdDayEl = document.querySelector(".third-day");
+var fourthDayEl = document.querySelector(".fourth-day");
+var fifthDayEl = document.querySelector(".fifth-day");
 
 // Variables for elements in the top row for the current day forecast
-var currentTownNameEl = document.querySelector(".currentTownName");
-var currentTownDateEl = document.querySelector(".currentTownDate");
-var currentTownIconEl = document.querySelector(".currentTownIcon");
+var currentTownNameEl = document.querySelector(".current-town-name");
+var currentTownDateEl = document.querySelector(".current-town-date");
+var currentTownIconEl = document.querySelector(".current-town-icon");
 
 // Variables for the form and list elements
 var listEl = document.querySelector(".list");
-var searchFormEl = document.querySelector(".mainForm");
+var searchFormEl = document.querySelector(".main-form");
 var submitBtn = document.querySelector("#submit");
-var cityInput = document.querySelector("#inputCity");
+var cityInput = document.querySelector("#input-city");
 
 // Variable to change elements background
-var uvAnswerBtn = document.querySelector("#uvAnswer");
+var uvAnswerBtn = document.querySelector("#uv-answer");
 
 // Variables for the api url for fetch
 var apiWeather = "http://api.openweathermap.org/data/2.5/weather?";
@@ -46,6 +43,7 @@ var completeUrl = apiWeather + "q=" + cityInput.value + "&appid=" + apiKey + "&u
 // Receives 2 objects of weather data and prints the data to the respective element in the current weather container
 function printResults(firstObj, secondObj) {
 
+    // Adding weather data for the Current Weather container
     if (firstObj.name) {
         currentTownNameEl.textContent = firstObj.name;
     } else {
@@ -63,35 +61,29 @@ function printResults(firstObj, secondObj) {
     } else {
         currentTownEl.textContent = "Weather Icon N/A"
     }
-
     if (firstObj.main.temp) {
         currentTempEl.textContent = "Temp: " + firstObj.main.temp + "C";
     } else {
         currentTempEl.textContent = "Temp N/A";
     }
-
     if (firstObj.main.humidity) {
         currentHumidityEl.textContent = "Humidity: " + firstObj.main.humidity + "%";
     } else {
         currentHumidityEl.textContent = "Humidity N/A";
     }
     if (firstObj.wind.speed) {
-        currentWindEl.textContent = "Wind Speed: " + firstObj.wind.speed + "km/h";
+        currentWindEl.textContent = "Wind Speed: " + firstObj.wind.speed + "m/s";
     } else {
         currentWindEl.textContent = "Wind Speed N/A";
     }
-    
-
     if (secondObj.daily[0].uvi) {
         uvAnswerBtn.textContent = secondObj.daily[0].uvi;
-        // console.log(secondObj.daily[0].uvi);
         uvIndex(secondObj.daily[0].uvi, uvAnswerBtn);
     } else {
         currentUvEl.textContent += "N/A";
     }
 
-    // fiveday forecast
-   
+    // Adding weather data for the 5-Day Forecast
     if (secondObj.daily[0]) {
         printFiveDayCard(secondObj.daily[0], firstDayEl);
     } else {
@@ -119,11 +111,11 @@ function printResults(firstObj, secondObj) {
     }
 }
 
-// Creates the five day weather forecast card and prints the respective data to the respective element
+// Creates the 5-Day weather forecast card and prints the respective data to the respective element
 function printFiveDayCard(dayData, dayElement) {
-    var dateCard = document.createElement("div");
-    dateCard.className = "fiveDayDate";
 
+    var dateCard = document.createElement("div");
+    dateCard.className = "five-day-date";
     var convertedDate = new Date(dayData.dt*1000).toLocaleDateString("en-AU");
     dateCard.textContent = convertedDate;
 
@@ -134,7 +126,7 @@ function printFiveDayCard(dayData, dayElement) {
     tempCard.textContent = "Temp: " + dayData.temp.day + "C";
 
     var windCard = document.createElement("div");
-    windCard.textContent = "Wind: " + dayData.wind_speed + "km/h";
+    windCard.textContent = "Wind: " + dayData.wind_speed + "m/s";
 
     var humidityCard = document.createElement("div");
     humidityCard.textContent = "Humidity: " + dayData.humidity + "%";
@@ -147,23 +139,16 @@ function printFiveDayCard(dayData, dayElement) {
 async function requestData(query) {
     
     var currentQueryUrl = apiWeather + "q=" + query + "&appid=" + apiKey + "&units=" + apiUnits;
-    //console.log(currentQueryUrl);
     const response = await fetch(currentQueryUrl);
-    console.log(response.status)
     const data = await response.json();
-    //console.log(data);
-    //console.log(data.coord.lon);
-    //console.log(data.coord.lat);
+
     lon = data.coord.lon;
     lat = data.coord.lat;
-    //console.log(lon);
-    //console.log(lat);
+
     var newUrl = apiOneCall + "lat=" + lat + "&lon=" + lon + "&appid=" + apiKey + "&units=" + apiUnits;
-    //console.log(newUrl);
     const secondResponse = await fetch(newUrl);
-    //console.log(secondResponse);
     const secondData = await secondResponse.json();
-    //console.log(secondData);
+
     printResults(data, secondData);
 }
 
@@ -173,12 +158,9 @@ function searchCity(city) {
     requestData(city);
 }
 
-// 
+// Requests the weather data by using the requestData function and the clicked on lists textContent
 function listSearch(event) {
-    event.preventDefault();
-    console.log(event.target.textContent);
     var listName = event.target.textContent;
-    console.log(listName);
     requestData(listName);
 }
 
@@ -189,7 +171,6 @@ function getFullIconUrl(icon) {
 
 // Changes the background of the UV index depending on level of UV
 function uvIndex(level, element) {
-    //console.log(level);
     if (level <= 2) {
         element.style.backgroundColor = "green";
     } else if (level > 2 && level <= 5) {
@@ -215,17 +196,12 @@ function setDefaultLocal() {
     }
 }
 
-// Runs setDefaultLocal
-setDefaultLocal();
-
 // Adds list elements from the local storage
 function appendLocalStorage() {
     var array = localStorage.getItem("Towns");
-    console.log(array);
 
     var splitArray = array.split(",");    
     var ul = document.querySelector(".list");
-    console.log(splitArray);
     // While loop removes town names from list, so not to double up on the list
     while(ul.firstChild) {
         ul.removeChild(ul.firstChild);
@@ -237,7 +213,10 @@ function appendLocalStorage() {
     }
 }
 
-// Runs appendLocalStorage
+// Runs setDefaultLocal so there is local storage information to be used for appendLocalStorage()
+setDefaultLocal();
+
+// Runs appendLocalStorage so there is list items for the list on the side when you open the page
 appendLocalStorage();
 
 // Event listener for each individual list item displaying town names for search
@@ -247,6 +226,5 @@ listEl.addEventListener("click", listSearch);
 searchFormEl.addEventListener("submit", function(event) {
     event.preventDefault();
     cityInputVal = cityInput.value;
-    // console.log(cityInputVal);
     searchCity(cityInputVal);
 })

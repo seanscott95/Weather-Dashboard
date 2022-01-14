@@ -66,23 +66,23 @@ input {
     padding-top: 10px;
 }
 
-.mainContainer {
+.main-container {
     display: flex;
     margin: 5px;
 }
 
-.formContainer {
+.form-container {
     width: 25%;
     height: 90vh;    
 }
 
-.rightContainer {
+.right-container {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
 }
 
-.currentWeather {
+.current-weather {
     display: flex;
     flex-direction: column;
     width: 70vw;
@@ -90,13 +90,13 @@ input {
     border: 2px solid black;
     margin: 20px;
 }
-.forecastContainer {
+.forecast-container {
     width: 70vw;
     height: 40vh;
     margin: 20px;
 }
 
-.currentTown {
+.current-town {
     display: flex;
     height: 10%;
     align-items: center;
@@ -107,7 +107,7 @@ img {
     width: auto;
 }
 
-.fiveDayDate {
+.five-day-date {
     font-size: large;
     font-weight: bold;
 }
@@ -122,12 +122,12 @@ img {
     margin-left: 10px;
 }
 
-.currentTownName, .currentTownDate {
+.current-town-name, .current-town-date {
     font-size: x-large;
     font-weight: bold;
 }
 
-#uvAnswer {
+#uv-answer {
     padding: 4px 15px;
     border-radius: 5px;
     border: none;
