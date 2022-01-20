@@ -69,6 +69,7 @@ input {
 .main-container {
     display: flex;
     margin: 5px;
+    background-color: blue;
 }
 
 .form-container {

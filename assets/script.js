@@ -30,7 +30,7 @@ var cityInput = document.querySelector("#input-city");
 var uvAnswerBtn = document.querySelector("#uv-answer");
 
 // Variables for the api url for fetch
-var apiWeather = "https://api.openweathermap.org/data/2.5/weather?";
+var apiWeather = "http://api.openweathermap.org/data/2.5/weather?";
 var apiOneCall = "https://api.openweathermap.org/data/2.5/onecall?";
 var lon = "";
 var lat = "";
@@ -167,7 +167,7 @@ function listSearch(event) {
 
 // Returns the correct url for each image weather icon
 function getFullIconUrl(icon) {
-    return "https://openweathermap.org/img/wn/" + icon + "@2x.png";
+    return "http://openweathermap.org/img/wn/" + icon + "@2x.png";
 }
 
 // Changes the background of the UV index depending on level of UV
