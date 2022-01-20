@@ -160,6 +160,7 @@ function searchCity(city) {
 
 // Requests the weather data by using the requestData function and the clicked on lists textContent
 function listSearch(event) {
+    
     var listName = event.target.textContent;
     requestData(listName);
 }
@@ -209,6 +210,7 @@ function appendLocalStorage() {
     for (var i=0; i < splitArray.length; i++) {
         var li = document.createElement("li");
         li.textContent = splitArray[i];
+        li.addEventListener("click", listSearch);
         ul.insertBefore(li, ul.firstChild);
     }
 }
@@ -220,7 +222,7 @@ setDefaultLocal();
 appendLocalStorage();
 
 // Event listener for each individual list item displaying town names for search
-listEl.addEventListener("click", listSearch);
+// listEl.addEventListener("click", listSearch);
 
 //Event listener for the form element when submitted
 searchFormEl.addEventListener("submit", function(event) {
