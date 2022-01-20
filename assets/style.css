@@ -55,6 +55,7 @@ input {
 }
 
 #submit {
+    background: blue;
     opacity: 60%;
     color: white;
     border-radius: 5px;
@@ -68,7 +69,6 @@ input {
 .main-container {
     display: flex;
     margin: 5px;
-    background-color: blue;
 }
 
 .form-container {
