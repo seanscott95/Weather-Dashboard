@@ -1,4 +1,4 @@
-# Week-06-Weather-Dashboard
+# Weather-Dashboard
 
 This application was created to see the weather outlook for multiple cities so that the user can plan a trip accordingly.
 
