@@ -9,10 +9,14 @@ When the user looks at the weather conditions for the search they will be presen
 When the user views the future weather conditions for that city they are presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity.
 
 Screenshots:
-![First screenshot showing what the page looks like once opened.](./assets/Weather-Dashboard-1.png)
-![Second screenshot showing what the page looks like after the top list item being Melbourne was clicked.](./assets/Weather-Dashboard-2.png)
-![Third screenshot showing what the page looks like after Townsville is searched.](./assets/Weather-Dashboard-3.png)
-![Fourth screenshot showing what the page looks like after being refreshed, the previous searches Geelong and Townsville remain on the list.](./assets/Weather-Dashboard-4.png)
+
+![Main](./assets/Weather-Dashboard-1.png)
+
+![Weather](./assets/Weather-Dashboard-2.png)
+
+![Searched](./assets/Weather-Dashboard-3.png)
+
+![Refreshed](./assets/Weather-Dashboard-4.png)
 
 Links:
 Deployed Page: https://seanscott95.github.io/Weather-Dashboard/
