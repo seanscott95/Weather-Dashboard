@@ -67,9 +67,9 @@ When the user views the future weather conditions for that city they are present
 ## Questions 
 <p> To reach me with additional questions please contact me via one of the following methods: </p>
 
-- GitHub: [GitHub](https://github.com/seanscott95)
-- Email: [Email](mailto:seanms418@gmail.com)
-- LinkedIn: [LinkedIn](https://www.linkedin.com/in/sean-scott-18ba07225/)
+- [GitHub](https://github.com/seanscott95)
+- [Email](mailto:seanms418@gmail.com)
+- [LinkedIn](https://www.linkedin.com/in/sean-scott-18ba07225/)
 
 ## Links
 - GitHub: https://github.com/seanscott95/Weather-Dashboard
